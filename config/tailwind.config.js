@@ -16,7 +16,10 @@ module.exports = {
         'primary-hover': {
           '700': '#a4411c',
           '500': '#EA9A72'
-        }
+        },
+        'brand': {
+          'blue': '#3b82f6',
+        },
       }
     },
   },
