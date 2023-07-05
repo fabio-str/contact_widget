@@ -1,6 +1,8 @@
 var PageTextWidget = {
     position: 'bottom-right',
     welcome_message: 'Send me a line',
+    formHtml: '<%= j render "form" %>',
+    cssStyles: "<% asset_url('tailwind.css') %>",
     circleStyles: {
         backgroundColor: 'black',
         height: '50px',
@@ -12,11 +14,17 @@ var PageTextWidget = {
         cursor: 'pointer'
     },
 
-    formHtml: '<%= j render "form" %>',
-
     init: function() {
         console.log('Widget initialized!');
         this.showIcon();
+        this.plantCss();
+    },
+
+    plantCss: function() {
+        let stylesheet = document.createElement('link');
+        stylesheet.rel = 'stylesheet';
+        stylesheet.href = this.cssStyles;
+        document.head.append(stylesheet);
     },
 
     showForm: function() {
