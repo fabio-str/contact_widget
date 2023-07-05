@@ -1,0 +1,45 @@
+var PageTextWidget = {
+    position: 'bottom-right',
+    welcome_message: 'Send me a line',
+    circleStyles: {
+        backgroundColor: 'black',
+        height: '50px',
+        width: '50px',
+        borderRadius: '50%',
+        position: 'absolute',
+        bottom: '10px',
+        right: '10px',
+        cursor: 'pointer'
+    },
+
+    formHtml: '<%= j render "form" %>',
+
+    init: function() {
+        console.log('Widget initialized!');
+        this.showIcon();
+    },
+
+    showForm: function() {
+        document.body.insertAdjacentHTML('beforeend', this.formHtml);
+        this.hideIcon();
+    },
+
+    hideForm: function() {
+        document.getElementById('page_text_widget').remove();
+        this.showIcon();
+    },
+
+    hideIcon: function() {
+        document.getElementById('page_text_icon').remove();
+    },
+
+    showIcon: function() {
+        let icon = document.createElement('span');
+        icon.id = 'page_text_icon';
+        icon.addEventListener('click', this.showForm.bind(this));
+        Object.assign(icon.style, this.circleStyles);
+        document.body.append(icon);
+    }
+}
+
+PageTextWidget.init();
