@@ -30,12 +30,14 @@ var PageTextWidget = {
     showForm: function() {
         document.body.insertAdjacentHTML('beforeend', this.formHtml);
         document.getElementById('new_message').addEventListener('submit', this.submitForm);
+        document.getElementById('widget_cancel').addEventListener('click', this.hideForm);
         this.hideIcon();
+        this.storeInfo();
     },
 
     hideForm: function() {
         document.getElementById('page_text_widget').remove();
-        this.showIcon();
+        PageTextWidget.showIcon();
     },
 
     hideIcon: function() {
@@ -58,8 +60,42 @@ var PageTextWidget = {
           method: 'POST',
           body: new FormData(form)
         }).then((response) => {
-          console.log('success response received! you hide the form and show a thank you message now.');
+          PageTextWidget.hideForm();
+          var confirmationMessage = document.createElement('div');
+          confirmationMessage.innerHTML = 'Your form has been submitted successfully!';
+          confirmationMessage.classList.add('confirmation-notice');
+          document.body.insertBefore(confirmationMessage, document.body.firstChild);
         })
+    },
+
+    storeInfo: function () {
+        // Attach event listeners to the name and email form fields
+        const message_name = document.getElementById("message_name");
+        const message_email = document.getElementById("message_email");
+    
+        message_name.addEventListener("change", function () {
+            // Save the name to localStorage on change
+            localStorage.setItem("pageTextWidget-name", this.value);
+        });
+    
+        message_email.addEventListener("change", function () {
+            // Save the email to localStorage on change
+            localStorage.setItem("pageTextWidget-email", this.value);
+        });
+    
+        // Check if we have pre-saved values for the name and email fields
+        const savedName = localStorage.getItem("pageTextWidget-name");
+        const savedEmail = localStorage.getItem("pageTextWidget-email");
+    
+        if (savedName) {
+            // Pre-fill the name field
+            message_name.value = savedName;
+        }
+    
+        if (savedEmail) {
+            // Pre-fill the email field
+            message_email.value = savedEmail;
+        }
     }
 }
 

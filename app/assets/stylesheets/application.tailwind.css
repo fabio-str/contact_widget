@@ -30,3 +30,12 @@
   @apply bg-green-400;
   background-color: #68D391;
 }
+
+.confirmation-notice {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #D4EDDA;
+  color: #155724;
+  border: 1px solid #C3E6CB;
+  text-align: center;
+}
