@@ -1,6 +1,7 @@
-<div id="page_text_widget" style="z-index: 999999 !important" class="w-72 border border-2 border-black rounded-md absolute bottom-5 right-10 bg-white	">
+<div id="page_text_widget" style="z-index: 999999 !important" class="w-72 border border-2 border-black rounded-md absolute bottom-5 bg-white	">
   <form class="new_message" id="new_message" action="<%= ENV['base_url'] %>/messages" accept-charset="UTF-8" method="post">
-    <div class="pb-7 pt-4 flex items-center gap-x-2 bg-brand-blue">
+    <input type="hidden" name="client_id" id="client_id" value=""></input>
+    <div class="pb-7 pt-4 flex items-center gap-x-2 page_text_widget_background_color">
       <div id="widget_cancel" class="absolute top-0 right-0 p-1 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -10,7 +11,7 @@
         <img src="https://via.placeholder.com/60x60" class="rounded-full" alt="">
       </div>
       <div class="">
-        welcome message here
+        <span id="page_text_widget_welcome_message"></span>
       </div>
     </div>
 
@@ -41,7 +42,7 @@
 
     <div class="pt-5">
       <div class="flex justify-end">
-        <button type="submit" class="w-full inline-flex justify-center rounded-t-md rounded-b-sm border border-transparent bg-brand-blue hover:bg-brand-blue-dark py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send</button>
+        <button type="submit" class="w-full inline-flex justify-center rounded-t-md rounded-b-sm border border-transparent page_text_widget_background_color py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Send</button>
       </div>
     </div>
   </form>

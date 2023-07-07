@@ -1,21 +1,43 @@
 var PageTextWidget = {
-    position: 'bottom-right',
-    welcome_message: 'Send me a line',
+    welcomeMessage: '<%= @widget.welcome_message %>',
+    backgroundColor: '<%= @widget.background_color %>',
+    shape: '<%= @widget.shape %>',
+    location: '<%= @widget.location %>',
     formHtml: '<%= j render "form" %>',
-    cssStyles: "<% asset_url('tailwind.css') %>",
-    circleStyles: {
-        backgroundColor: 'black',
-        height: '50px',
-        width: '50px',
-        borderRadius: '50%',
-        position: 'absolute',
-        bottom: '10px',
-        right: '10px',
-        cursor: 'pointer'
+    cssStyles: "<%= asset_url('tailwind.css') %>",
+    iconStyles: {
+        circle: {
+            backgroundColor: 'black',
+            height: '50px',
+            width: '50px',
+            borderRadius: '50%',
+            position: 'absolute',
+            bottom: '10px',
+            cursor: 'pointer',
+            bottom: '10px' 
+        },
+        square: {
+            backgroundColor: 'black',
+            height: '50px',
+            width: '50px',
+            position: 'absolute',
+            bottom: '10px',
+            cursor: 'pointer',
+            bottom: '10px'
+        },
+        rectangle: {
+            backgroundColor: 'black',
+            height: '50px',
+            width: '100px',
+            borderRadius: '10%',
+            position: 'absolute',
+            bottom: '10px',
+            cursor: 'pointer',
+            bottom: '10px'
+        }
     },
 
     init: function() {
-        console.log('Widget initialized!');
         this.showIcon();
         this.plantCss();
     },
@@ -27,8 +49,51 @@ var PageTextWidget = {
         document.head.append(stylesheet);
     },
 
+    customizeWidget: function() {
+        var self = this;
+
+        // set custom client id
+        document.getElementById('client_id').value = '<%= @widget.client_id %>';
+
+        // customize welcome message
+        document.getElementById('page_text_widget_welcome_message').innerText = self.welcomeMessage;
+
+        // customize background color of welcome message block and submit button
+        Array.from(document.getElementsByClassName('page_text_widget_background_color')).forEach( function(el) {
+            el.style.backgroundColor = self.backgroundColor;
+        });
+
+        // set form location
+        let widget = document.getElementById('page_text_widget');
+        let offset = '20px';
+        if (self.location == 'bottom_right') {
+            widget.style.right = offset;
+        } else if (self.location == 'bottom_left') {
+            widget.style.left = offset;
+        };
+    },
+
+    customizeIcon: function(icon) {
+        // set icon shape
+        Object.assign(icon.style, this.iconStyles[this.shape]);
+
+        // set icon location
+        let offset = '10px'
+        if (this.location == 'bottom_right') {
+            icon.style.right = offset;
+        } else if (this.location == 'bottom_left') {
+            icon.style.left = offset;
+        };
+
+        // plant icon
+        document.body.append(icon);
+    },
+
     showForm: function() {
         document.body.insertAdjacentHTML('beforeend', this.formHtml);
+
+        this.customizeWidget();
+
         document.getElementById('new_message').addEventListener('submit', this.submitForm);
         document.getElementById('widget_cancel').addEventListener('click', this.hideForm);
         this.hideIcon();
@@ -48,8 +113,7 @@ var PageTextWidget = {
         let icon = document.createElement('span');
         icon.id = 'page_text_icon';
         icon.addEventListener('click', this.showForm.bind(this));
-        Object.assign(icon.style, this.circleStyles);
-        document.body.append(icon);
+        this.customizeIcon(icon);
     },
 
     submitForm: function(e) {

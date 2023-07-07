@@ -5,7 +5,7 @@
       </td>
 
       <td class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-2">
-        <input class="w-full" readonly name="" value="<script src='https://<%= ENV['base_url'] %>/widget.js?client_id=<%= widget.client_id %>'></scipt>">
+        <input class="w-full" readonly name="" value="<%= snippet_code(widget) %>">
       </td>
 
       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-left">
