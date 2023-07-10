@@ -66,6 +66,8 @@ var PageTextWidget = {
         // set form location
         let widget = document.getElementById('page_text_widget');
         let offset = '20px';
+        widget.style.bottom = offset;
+        
         if (self.location == 'bottom_right') {
             widget.style.right = offset;
         } else if (self.location == 'bottom_left') {
