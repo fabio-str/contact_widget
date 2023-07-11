@@ -1,78 +1,130 @@
-<%= form_with(model: widget, class: "contents") do |form| %>
-  <% if widget.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(widget.errors.count, "error") %> prohibited this widget from being saved:</h2>
+<div class="flex gap-5">
+  <div class="basis-1/2">
+    <%= form_with(model: widget, class: "contents") do |form| %>
+      <% if widget.errors.any? %>
+        <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+          <h2><%= pluralize(widget.errors.count, "error") %> prohibited this widget from being saved:</h2>
 
-      <ul>
-        <% widget.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% widget.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :welcome_message %>
-    <%= form.text_field :welcome_message, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :background_color %><br>
-    <%= form.color_field :background_color %>
-  </div>
-
-  <div class="my-5">
-    
-    <div>
-      <%= form.label :shape %>
-    </div>
-
-    <div class="flex gap-x-6 mt-4">
-      <div>
-        <label class="custom-option">
-          <input type="checkbox" name="widget[shape]" value="circle">
-          <div style="display:inline-block; width: 30px; height: 30px; border-radius: 50%; background-color: transparent; border: 2px solid black"></div>
-        </label>
+      <div class="my-5">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
       </div>
 
-      <div>
-        <label class="custom-option">
-          <input type="checkbox" name="widget[shape]" value="square">
-          <div style="display:inline-block; width: 30px; height: 30px; background-color: transparent; border: 2px solid black"></div>
-        </label>
+      <div class="my-5">
+        <%= form.label :welcome_message %>
+        <%= form.text_field :welcome_message, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
       </div>
 
-      <div>
-        <label class="custom-option">
-          <input type="checkbox" name="widget[shape]" value="rectangle">
-          <div style="display:inline-block; width: 30px; height: 30px; border-radius: 10px; background-color: transparent; border: 2px solid black"></div>
-        </label>
+      <div class="my-5">
+        <%= form.label :background_color %><br>
+        <%= form.color_field :background_color %>
       </div>
-    </div>
 
+      <div class="my-5">
+        
+        <div>
+          <%= form.label :shape %>
+        </div>
+
+        <div class="flex gap-x-6 mt-4">
+          <div>
+            <label class="custom-option">
+              <input type="checkbox" name="widget[shape]" value="circle">
+              <div style="display:inline-block; width: 30px; height: 30px; border-radius: 50%; background-color: transparent; border: 2px solid black"></div>
+            </label>
+          </div>
+
+          <div>
+            <label class="custom-option">
+              <input type="checkbox" name="widget[shape]" value="square">
+              <div style="display:inline-block; width: 30px; height: 30px; background-color: transparent; border: 2px solid black"></div>
+            </label>
+          </div>
+
+          <div>
+            <label class="custom-option">
+              <input type="checkbox" name="widget[shape]" value="rectangle">
+              <div style="display:inline-block; width: 30px; height: 30px; border-radius: 10px; background-color: transparent; border: 2px solid black"></div>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="my-5">
+        <%= form.label :location %><br>
+        <%= form.select :location, [['Bottom Right', 'bottom_right'], ['Bottom Left', 'bottom_left']] %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :avatar %><br>
+        <%= form.file_field :avatar %>
+      </div>
+
+      <div class="my-5">
+        <%= form.label :enabled %>
+        <%= form.check_box :enabled, class: "block mt-2 h-5 w-5" %>
+      </div>
+
+      <div class="inline">
+        <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        <%= link_to "Go Back", widgets_path, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :location %><br>
-    <%= form.select :location, [['Bottom Right', 'bottom_right'], ['Bottom Left', 'bottom_left']] %>
+  <div class="basis-1/2">
+    <%= render ('snippet/form')%>
   </div>
+  
+</div>
 
-  <div class="my-5">
-    <%= form.label :avatar %><br>
-    <%= form.file_field :avatar %>
-  </div>
+<script>
+  
+  // set default background color and text
 
-  <div class="my-5">
-    <%= form.label :enabled %>
-    <%= form.check_box :enabled, class: "block mt-2 h-5 w-5" %>
-  </div>
+  function setDefaults() { 
+    Array.from(document.getElementsByClassName('page_text_widget_background_color')).forEach( function(el) {
+      el.style.backgroundColor = document.getElementById('widget_background_color').value;
+    });
+    document.getElementById('page_text_widget_welcome_message').innerText = document.getElementById('widget_welcome_message').value;
+  };
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
+  setDefaults();
+
+  // preview background color selection
+
+  document.getElementById('widget_background_color').addEventListener('change', function() {
+      let customColor = document.getElementById('widget_background_color').value;
+      
+      Array.from(document.getElementsByClassName('page_text_widget_background_color')).forEach( function(el) {
+      el.style.backgroundColor = customColor;
+    });
+  });
+
+  // set Welcome message preview
+  
+  document.getElementById('widget_welcome_message').addEventListener('keyup', function() {
+    document.getElementById('page_text_widget_welcome_message').innerText = document.getElementById('widget_welcome_message').value;
+  });
+
+  // disable form
+
+  function disableForm() {
+    document.getElementById('message_name').disabled = true;
+    document.getElementById('message_email').disabled = true;
+    document.getElementById('message_content').disabled = true;
+    document.getElementById('message_submit').disabled = true;
+  }
+
+  disableForm();
+
+</script>
