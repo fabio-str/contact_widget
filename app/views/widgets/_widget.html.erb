@@ -5,11 +5,11 @@
       </td>
 
       <td class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-2">
-        <input class="w-full" readonly name="" value="<%= snippet_code(widget) %>">
+        <input class="w-full" id="snippet_script_copy" readonly name="" value="<%= snippet_code(widget) %>">
       </td>
 
       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-left">
-        <a href="#" class="text-indigo-600 hover:text-indigo-900">Copy<span class="sr-only"></span></a>
+        <a onclick="copySnippet()" class="text-indigo-600 hover:text-indigo-900 cursor-pointer">Copy<span class="sr-only"></span></a>
       </td>
 
       <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

@@ -131,6 +131,11 @@ var PageTextWidget = {
           confirmationMessage.innerHTML = 'Your form has been submitted successfully!';
           confirmationMessage.classList.add('confirmation-notice');
           document.body.insertBefore(confirmationMessage, document.body.firstChild);
+
+          setTimeout(function () {
+            var elements = document.getElementsByClassName('confirmation-notice');
+            if (elements.length > 0) { elements[0].remove(); }
+            }, 3000);
         })
     },
 

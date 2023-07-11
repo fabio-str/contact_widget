@@ -15,7 +15,7 @@
               <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Widget Name</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Snippet</th>
               <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                <span class="sr-only">Edit</span>
+                <span class="sr-only">Copy</span>
               </th>
               <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right">
                 <span class="sr-only">Delete</span>
@@ -34,3 +34,28 @@
 <div class="flex justify-between items-center mt-4">
   <%= link_to 'New widget', new_widget_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
 </div>
+
+<script>
+  function copySnippet() {
+  // Get the text field
+  var copyText = document.getElementById("snippet_script_copy");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Send notice
+  var confirmationMessage = document.createElement('div');
+  confirmationMessage.innerHTML = 'Snippet code copied!';
+  confirmationMessage.classList.add('confirmation-notice');
+  document.body.insertBefore(confirmationMessage, document.body.firstChild);
+
+  setTimeout(function () {
+    var elements = document.getElementsByClassName('confirmation-notice');
+    if (elements.length > 0) { elements[0].remove(); }
+  }, 3000);
+}
+</script>
