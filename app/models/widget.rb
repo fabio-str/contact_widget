@@ -9,4 +9,6 @@ class Widget < ApplicationRecord
   def generate_client_id
     self.client_id = SecureRandom.hex(5)
   end
+
+  validates_presence_of :name, :welcome_message, :background_color, :shape, :location, :enabled
 end

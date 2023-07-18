@@ -36,9 +36,9 @@
 </div>
 
 <script>
-  function copySnippet() {
+  function copySnippet(widgetId) {
   // Get the text field
-  var copyText = document.getElementById("snippet_script_copy");
+  var copyText = document.getElementById("snippet_script_copy_" + widgetId);
 
   // Select the text field
   copyText.select();

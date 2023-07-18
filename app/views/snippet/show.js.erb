@@ -72,7 +72,16 @@ var PageTextWidget = {
             widget.style.right = offset;
         } else if (self.location == 'bottom_left') {
             widget.style.left = offset;
-        };
+        }
+
+        // set avatar
+        <% if @widget.avatar.present? %>
+            let avatarSrc = '<%= Rails.application.routes.url_helpers.url_for(@widget.avatar) %>';
+            document.getElementById('page_text_widget_avatar').src = avatarSrc;
+        <% end %>
+
+        // put form in focus
+        document.getElementById('message_name').focus();
     },
 
     customizeIcon: function(icon) {
