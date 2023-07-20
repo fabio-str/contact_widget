@@ -3,6 +3,7 @@ var PageTextWidget = {
     backgroundColor: '<%= @widget.background_color %>',
     shape: '<%= @widget.shape %>',
     location: '<%= @widget.location %>',
+    enabled: <%= @widget.enabled %>,
     formHtml: '<%= j render "form" %>',
     cssStyles: "<%= asset_url('tailwind.css') %>",
     iconStyles: {
@@ -38,8 +39,11 @@ var PageTextWidget = {
     },
 
     init: function() {
-        this.showIcon();
-        this.plantCss();
+        if (this.enabled) {
+            this.showIcon();
+            this.plantCss();
+        }
+
     },
 
     plantCss: function() {
