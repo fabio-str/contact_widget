@@ -19,7 +19,7 @@
       <div class="text-sm sm:flex-grow">
         <% if current_user %>
           <%= link_to 'Admin', admin_dashboard_index_path, class: nav_link_classes('admin/dashboard') if current_user.admin? %>
-          <%= link_to 'Widgets', widgets_path, class: nav_link_classes('widgets') %>
+          <%= link_to 'Dashboard', widgets_path, class: nav_link_classes('widgets') %>
           <%= link_to 'Messages', messages_path, class: nav_link_classes('messages') %>
           <%= link_to 'Account', account_index_path, class: nav_link_classes('account') %>
           <%= link_to 'Logout', logout_path, class: nav_link_classes %>

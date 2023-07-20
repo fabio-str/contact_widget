@@ -12,6 +12,8 @@ class Message < ApplicationRecord
     MessagesMailer.notification(self).deliver
   end
 
+  handle_asynchronously :notify_user
+
   def self.to_csv(messages)
     CSV.generate do |csv|
       csv << [ 'created_at', 'name', 'email', 'content'  ] # title row
